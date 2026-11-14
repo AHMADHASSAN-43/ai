@@ -10,7 +10,7 @@ import { KEY } from '../lib/key.js';
 
 const __filename = fileURLToPath(import.meta.url);
 
-const API_URL = 'https://ahmad-md.vercel.app/api/servers';
+const API_URL = 'https://kweentech.vercel.app/api/servers';
 
 // ═══════════════════════════════════════════
 // NOTIFY — ALLOWED USERS ONLY
