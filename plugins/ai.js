@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 
 const API_URL = 'https://adeel-xtech-api.onrender.com/api/gptv2';
 const TIMEOUT = 15000;
-const API_TOKEN = 'Ahmad568868990866';
+const API_TOKEN = 'public-Adeel-md-api';
 
 // ===== SAARE AI NAMES (bina prefix support ke liye) =====
 const ALL_AI = [
