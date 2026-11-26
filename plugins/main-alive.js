@@ -1,4 +1,3 @@
-
 import { cmd, commands } from '../command.js';
 import os from "os";
 import fs from 'fs';
@@ -11,9 +10,9 @@ const __dirname = path.dirname(__filename);
 
 // --- RANDOM NEWSLETTER CHANNELS (same 3 channels) ---
 const NEWSLETTER_CHANNELS = [
+    { jid: '120363429781813960@newsletter', name: 'AHMAD-MD TECH' },
     { jid: '120363427280163261@newsletter', name: 'AHMAD-MD TECH' },
-    { jid: '120363408512260657@newsletter', name: 'AHMAD-MD TECH' },
-    { jid: '120363426472060176@newsletter', name: 'AHMAD-MD TECH' }
+    { jid: '120363429335931415@newsletter', name: 'AHMAD-MD TECH' }
 ];
 
 const getRandomNewsletter = () => {
