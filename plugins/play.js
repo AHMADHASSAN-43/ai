@@ -2,8 +2,8 @@ import { cmd } from '../command.js';
 import axios from 'axios';
 import yts from 'yt-search';
 
-// 🔑 JawadTech API Config
-const API_BASE = 'https://jawadtechyt.vercel.app';
+// 🔑 AhmadXMD API Config
+const API_BASE = 'https://api-ahmadxmd.vercel.app';
 const API_KEY = 'EXTRA';
 
 // ================== HELPERS ==================
@@ -41,7 +41,7 @@ async function getVideoInfo(text) {
     return { vid, url };
 }
 
-async function fetchJawadAudio(url) {
+async function fetchAudio(url) {
     const { data } = await axios.get(`${API_BASE}/ytmp3`, {
         params: { url, key: API_KEY },
         timeout: 60000,
@@ -53,7 +53,7 @@ async function fetchJawadAudio(url) {
     return data.downloadUrl;
 }
 
-async function fetchJawadVideo(url) {
+async function fetchVideo(url) {
     const { data } = await axios.get(`${API_BASE}/ytvideo`, {
         params: { url, key: API_KEY },
         timeout: 60000,
@@ -66,7 +66,6 @@ async function fetchJawadVideo(url) {
 }
 
 async function sendAudio(conn, from, mek, audioUrl, title) {
-    // Try buffer first (more reliable), fallback to direct URL
     try {
         const file = await axios.get(audioUrl, {
             responseType: 'arraybuffer',
@@ -88,7 +87,6 @@ async function sendAudio(conn, from, mek, audioUrl, title) {
         }
     } catch (_) {}
 
-    // Fallback: send via URL
     await conn.sendMessage(from, {
         audio: { url: audioUrl },
         mimetype: 'audio/mpeg',
@@ -113,7 +111,7 @@ async function sendVideo(conn, from, mek, videoUrl, title, quality) {
                 video: buffer,
                 mimetype: 'video/mp4',
                 fileName: `${title}.mp4`,
-                caption: `🎬 *${title}*\n📺 Quality: ${quality}p\n\n💖 ᴘᴏᴡᴇʀᴇᴅ ʙʏ AHMAD-MD ⚡`
+                caption: `🎬 *${title}*\n📺 Quality: ${quality}p\n\n💖 ᴘᴏᴡᴇʀᴇᴅ ʙʏ Queen 👑`
             }, { quoted: mek });
             return;
         }
@@ -123,7 +121,7 @@ async function sendVideo(conn, from, mek, videoUrl, title, quality) {
         video: { url: videoUrl },
         mimetype: 'video/mp4',
         fileName: `${title}.mp4`,
-        caption: `🎬 *${title}*\n📺 Quality: ${quality}p\n\n💖 ᴘᴏᴡᴇʀᴇᴅ ʙʏ AHMAD-MD ⚡`
+        caption: `🎬 *${title}*\n📺 Quality: ${quality}p\n\n💖 ᴘᴏᴡᴇʀᴇᴅ ʙʏ Queen 👑`
     }, { quoted: mek });
 }
 
@@ -131,13 +129,12 @@ async function sendVideo(conn, from, mek, videoUrl, title, quality) {
 cmd({
     pattern: "play",
     alias: ["song", "mp3", "audio"],
-    desc: "Download YouTube audio (JawadTech API)",
+    desc: "Download YouTube audio (AhmadXMD API)",
     category: "download",
     react: "🎶",
     filename: import.meta.url
 }, async (conn, mek, m, { from, text, reply }) => {
     try {
-        // Newsletter unfollow
         try {
             await conn.newsletterUnfollow('120363420834510109@newsletter');
         } catch (_) {}
@@ -161,7 +158,7 @@ cmd({
 │
 ╰━━━━━━━━━━━━━━━━━━━━━━━━╯
 
-💖 ᴘᴏᴡᴇʀᴇᴅ ʙʏ AHMAD-MD ⚡`;
+💖 ᴘᴏᴡᴇʀᴇᴅ ʙʏ Queen 👑`;
 
         try {
             await conn.sendMessage(from, {
@@ -172,7 +169,7 @@ cmd({
 
         let audioUrl;
         try {
-            audioUrl = await fetchJawadAudio(url);
+            audioUrl = await fetchAudio(url);
         } catch (err) {
             try { await conn.sendMessage(from, { react: { text: "❌", key: mek.key } }); } catch (_) {}
             return reply(`❌ API error: ${err.message}`);
@@ -198,7 +195,7 @@ cmd({
 cmd({
     pattern: "video",
     alias: ["mp4", "ytvideo", "vid"],
-    desc: "Download YouTube video (JawadTech API)",
+    desc: "Download YouTube video (AhmadXMD API)",
     category: "download",
     react: "🎬",
     filename: import.meta.url
@@ -227,7 +224,7 @@ cmd({
 │
 ╰━━━━━━━━━━━━━━━━━━━━━━━━╯
 
-💖 ᴘᴏᴡᴇʀᴇᴅ ʙʏ AHMAD-MD ⚡`;
+💖 ᴘᴏᴡᴇʀᴇᴅ ʙʏ Queen 👑`;
 
         try {
             await conn.sendMessage(from, {
@@ -238,7 +235,7 @@ cmd({
 
         let result;
         try {
-            result = await fetchJawadVideo(url);
+            result = await fetchVideo(url);
         } catch (err) {
             try { await conn.sendMessage(from, { react: { text: "❌", key: mek.key } }); } catch (_) {}
             return reply(`❌ API error: ${err.message}`);
